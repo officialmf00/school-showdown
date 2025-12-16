@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eaf21760432c5b4f90e89e95b899cf3, type: 3}
+  m_Name: Fear
+  m_EditorClassIdentifier: 
+  characterName: Fear
+  characterPrefab: {fileID: 0}
+  specialMove1: 0
+  specialMove2: 0
+  specialMove3: 0
+  specialMove4: 0
+  Health: 999999999
+  basicAttackDamage: 100
+  basicAttackCooldown: 0.5
