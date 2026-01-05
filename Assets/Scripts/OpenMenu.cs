@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class OpenMenu : MonoBehaviour
@@ -11,6 +12,8 @@ public class OpenMenu : MonoBehaviour
 
     private Canvas showMenu;
 
+    [SerializeField] private AudioSource uiClickSound;
+
     public void changeHideMenu(string menuName)
     {
         hideMenuSource = GameObject.Find(menuName);
@@ -20,7 +23,8 @@ public class OpenMenu : MonoBehaviour
     }
     public void openMenu(string openMenuName)
     {
-     
+
+        uiClickSound.Play();
 
         foreach (Transform child in hideMenu.transform)
         {
