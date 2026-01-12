@@ -13,6 +13,8 @@ public class TitleScreenFadeIn : MonoBehaviour
     [SerializeField] private AudioSource titleScreenAmbience;
     [SerializeField] private AudioSource menuMusic;
 
+    private bool menuMusicOverrideDisable = true; // only does anything if set to true, where it will fully disable music
+
     private float fadeTime = 3;
 
     private float finalAmbienceVolume = 0.8f;
@@ -71,7 +73,10 @@ public class TitleScreenFadeIn : MonoBehaviour
 
         // Disable fade UI to allow menu interaction & start playing menu music
 
-        menuMusic.Play();
+        if (!menuMusicOverrideDisable)
+        {
+            menuMusic.Play();
+        }
 
         fadeInObject.SetActive(false);
 

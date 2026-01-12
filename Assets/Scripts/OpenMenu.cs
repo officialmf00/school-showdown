@@ -4,41 +4,45 @@ using UnityEngine.SceneManagement;
 
 public class OpenMenu : MonoBehaviour
 {
-    private Canvas hideMenu;
 
-    private GameObject hideMenuSource;
-
-    private GameObject showMenuSource;
-
-    private Canvas showMenu;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject playMenu;
 
     [SerializeField] private AudioSource uiClickSound;
 
-    public void changeHideMenu(string menuName)
-    {
-        hideMenuSource = GameObject.Find(menuName);
+    // For Reference: 1 = Main Menu, 2 = Play Menu, add onto as UI in title screen menu expands
 
-        hideMenu = hideMenuSource.GetComponentInParent<Canvas>();
-
-    }
-    public void openMenu(string openMenuName)
+    public void toggleMenu(int menuNum)
     {
+        GameObject theMenu = null;
+
+        // figure out which menu to toggle
+
+        if (menuNum == 1)
+        {
+            theMenu = mainMenu;
+        }
+        else if(menuNum == 2)
+        {
+            theMenu = playMenu;
+        }
+
+        // whether the menu will be shown or hidden based on what its current state is
 
         uiClickSound.Play();
 
-        foreach (Transform child in hideMenu.transform)
+        if (theMenu.activeSelf)
         {
-            child.gameObject.SetActive(false);
+            theMenu.SetActive(false);
+        }
+        else if (!theMenu.activeSelf)
+        {
+            theMenu.SetActive(true);
         }
 
-        showMenuSource = GameObject.Find(openMenuName);
+    }
+   
+}    
 
-        showMenu = showMenuSource.GetComponentInParent<Canvas>();
 
-        foreach (Transform child in showMenu.transform)
-        {
-            child.gameObject.SetActive(true);
-        }
 
-    }    
-}
