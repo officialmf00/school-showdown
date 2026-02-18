@@ -112,7 +112,7 @@ public class CharacterSelectManager : MonoBehaviour
 
         // load proper values
 
-            // for this, get function to return character script, and attach jump/movement script also acquired through different functions, then change the values through theres
+        // for this, get function to return character script, and attach jump/movement script also acquired through different functions, then change the values through theres
 
         // show battle UI
 
