@@ -46,4 +46,9 @@ public abstract class ChangeImageSizeMain : MonoBehaviour
         theValueRounded = Mathf.RoundToInt(theValue);
         healthText.text = theValueRounded.ToString() + "/" + displayHP.ToString();
     }
+
+    public void SetHealthCharacter(CharacterMain characterValue)
+    {
+        character = characterValue;
+    }
 }

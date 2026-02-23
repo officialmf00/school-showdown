@@ -13,12 +13,16 @@ public class CharacterSelectManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player2NameText;
 
     [SerializeField] private int currentSelectingPlayer;
-
     [SerializeField] private string currentlySelectingStage;
+    [SerializeField] private string currentySelectingMusic;
 
     [SerializeField] private GameObject[] fightStages;
-
     [SerializeField] private GameObject[] characterModels;
+    [SerializeField] private GameObject[] fightSongs;
+
+    [SerializeField] private AttackManager attackManager;
+
+    [SerializeField] private GameObject battleMusicHolder;
 
     private Vector3 player1SpawnPos = new(0, 1, 1.22000003f);
     private Vector3 player2SpawnPos = new(0, 1, 6.81379747f);
@@ -65,6 +69,8 @@ public class CharacterSelectManager : MonoBehaviour
 
         GameObject player2Character = null;
 
+        GameObject fightSong = null;
+
         // spawn in selected stage
 
         while (i < fightStages.Length)
@@ -75,6 +81,20 @@ public class CharacterSelectManager : MonoBehaviour
                 break;
             }
             i ++;
+        }
+
+        i = 0;
+
+        // spawn in selected track
+        
+        while (i < fightSongs.Length)
+        {
+            if (fightSongs[i].name == currentySelectingMusic)
+            {
+                fightSong = Instantiate(fightSongs[i], battleMusicHolder.gameObject.transform);
+                break;
+            }
+            i++;
         }
 
         i = 0;
@@ -110,14 +130,51 @@ public class CharacterSelectManager : MonoBehaviour
 
         i = 0;
 
-        // load proper values
+        // set player names in battle UI
 
-        // for this, get function to return character script, and attach jump/movement script also acquired through different functions, then change the values through theres
+        battleUI.transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>().text = player1NameText.text;
+        battleUI.transform.GetChild(5).gameObject.GetComponent<TextMeshProUGUI>().text = player2NameText.text;
+
+        // set P1Health character & Changeimgbar
+
+        battleUI.transform.GetChild(2).gameObject.GetComponent<ChangeImageSize>().SetHealthCharacter(player1Character.GetComponent<Character>());
+
+        player1Character.GetComponent<Character>().ChangeImageBar(battleUI.transform.GetChild(2).gameObject.GetComponent<ChangeImageSize>());
+
+        // set P2Health character & Changeimgbar
+
+        battleUI.transform.GetChild(3).gameObject.GetComponent<ChangeImageSize2>().SetHealthCharacter(player2Character.GetComponent<Character2>());
+
+        player2Character.GetComponent<Character2>().ChangeImageBar(battleUI.transform.GetChild(3).gameObject.GetComponent<ChangeImageSize2>());
+
+        // set P1 LifeImages
+
+        player1Character.GetComponent<Character>().ChangeLifeImage(0, battleUI.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Image>());
+        player1Character.GetComponent<Character>().ChangeLifeImage(1, battleUI.transform.GetChild(2).gameObject.transform.GetChild(2).gameObject.GetComponent<Image>());
+        player1Character.GetComponent<Character>().ChangeLifeImage(2, battleUI.transform.GetChild(2).gameObject.transform.GetChild(3).gameObject.GetComponent<Image>());
+
+        // set P2 LifeImages
+
+        player2Character.GetComponent<Character2>().ChangeLifeImage(0, battleUI.transform.GetChild(3).gameObject.transform.GetChild(3).gameObject.GetComponent<Image>());
+        player2Character.GetComponent<Character2>().ChangeLifeImage(1, battleUI.transform.GetChild(3).gameObject.transform.GetChild(2).gameObject.GetComponent<Image>());
+        player2Character.GetComponent<Character2>().ChangeLifeImage(2, battleUI.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Image>());
+
+        // set P1 AttackManager
+
+        player1Character.GetComponent<Character>().ChangeAttackManager(attackManager);
+
+        // set P2 AttackManager
+
+        player2Character.GetComponent<Character2>().ChangeAttackManager(attackManager);
 
         // show battle UI
 
         this.gameObject.SetActive(false);
 
         battleUI.SetActive(true);
+
+        // Play battle track
+
+        fightSong.GetComponent<AudioSource>().Play();
     }
 }

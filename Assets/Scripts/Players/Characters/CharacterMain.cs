@@ -196,6 +196,25 @@ public abstract class CharacterMain : MonoBehaviour
         return charVisual;
     }
 
+    // for character selection
+
+    public void ChangeImageBar(ChangeImageSizeMain imageValue)
+    {
+        changeimgbar = imageValue;
+    }
+
+    public void ChangeLifeImage(int lifeImageNumber, Image imageValue)
+    {
+        lifeImages[lifeImageNumber] = imageValue;
+    }
+
+    public void ChangeAttackManager(AttackManager attackManagerValue)
+    {
+        attackManager = attackManagerValue;
+    }
+
+    //
+
     public void setCurrentDealDamage(float damageNumber)
     {
         currentDealDamage = damageNumber;
