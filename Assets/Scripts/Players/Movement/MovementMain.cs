@@ -11,11 +11,19 @@ public abstract class MovementMain : MonoBehaviour
         P1, P2
     }
 
+    public enum CharacterType
+    {
+        TestRig, Character
+    }
+
     [SerializeField] protected float walkSpeed;
 
     [SerializeField] protected Player player;
 
     [SerializeField] protected CharacterMain character;
+
+    [SerializeField] protected CharacterType characterType;
+
 
     private float maxRaycastDistance = 1;
 
@@ -66,7 +74,16 @@ public abstract class MovementMain : MonoBehaviour
     {
         walkInput = ctx.ReadValue<Vector2>(); // (-0.71, 0.71)
 
-        Animator animator = character.GetAnimator();
+        Animator animator = null;
+
+        if (characterType == CharacterType.TestRig)
+        {
+            animator = character.GetAnimator();
+        }
+        else // new characters
+        {
+            animator = charVisual.GetComponent<Animator>();
+        }
 
         animator.SetBool("WalkBool", true);
 
@@ -78,7 +95,16 @@ public abstract class MovementMain : MonoBehaviour
     {
         walkInput = Vector2.zero;
 
-        Animator animator = character.GetAnimator();
+        Animator animator = null;
+
+        if (characterType == CharacterType.TestRig)
+        {
+            animator = character.GetAnimator();
+        }
+        else // new characters
+        {
+            animator = charVisual.GetComponent<Animator>();
+        }
 
         animator.SetBool("WalkBool", false);
     }

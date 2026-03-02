@@ -29,6 +29,8 @@ public abstract class JumpScriptMain : MonoBehaviour
 
     private bool doubleJumpActive = true;
 
+    [SerializeField] private Animator charAnimator;
+
     private void Awake()
     {
         canJump = true;
@@ -66,7 +68,11 @@ public abstract class JumpScriptMain : MonoBehaviour
         if (canJump == true)
         {
             canJump = false;
-            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            if (charAnimator != null)
+            {
+                charAnimator.SetTrigger("Jump");
+            }
+            rb.AddForce(Vector3.up * jumpHeight / 2, ForceMode.Impulse);
             StartCoroutine(JumpCooldown());
         }
     }
@@ -86,7 +92,11 @@ public abstract class JumpScriptMain : MonoBehaviour
         if (doubleJumpActive == false)
         {
             //float turn = Input.GetAxis("Horizontal");
-            rb.AddForce(Vector3.up * jumpHeight / 2, ForceMode.Impulse);
+            if (charAnimator != null)
+            {
+                charAnimator.SetTrigger("DoubleJump");
+            }
+            rb.AddForce(Vector3.up * jumpHeight / 1.25f, ForceMode.Impulse);
         }
     }
 }

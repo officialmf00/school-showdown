@@ -177,7 +177,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""BasicAttack1P2"",
                     ""type"": ""Button"",
                     ""id"": ""ff9ffd5c-7bde-44aa-a0fb-2824ca164423"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -195,7 +195,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""JumpP2"",
                     ""type"": ""Button"",
                     ""id"": ""da4965b5-56ab-464d-b397-ec719b7d0d02"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -217,6 +217,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SprintP1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0aed1a3e-8291-4817-ad09-b5c207a6779b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SprintP2"",
+                    ""type"": ""Button"",
+                    ""id"": ""e93a8036-7e77-4425-b14d-508bcf5ccfed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -417,6 +435,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""WalkP2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9461b1c2-dda3-4e93-a01e-c8f399a1e082"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SprintP1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e6d413e-ffd5-4e3b-bf85-4e26950a9649"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SprintP2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -439,6 +479,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Fighting_JumpP2 = m_Fighting.FindAction("JumpP2", throwIfNotFound: true);
         m_Fighting_WalkP1 = m_Fighting.FindAction("WalkP1", throwIfNotFound: true);
         m_Fighting_WalkP2 = m_Fighting.FindAction("WalkP2", throwIfNotFound: true);
+        m_Fighting_SprintP1 = m_Fighting.FindAction("SprintP1", throwIfNotFound: true);
+        m_Fighting_SprintP2 = m_Fighting.FindAction("SprintP2", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -533,6 +575,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Fighting_JumpP2;
     private readonly InputAction m_Fighting_WalkP1;
     private readonly InputAction m_Fighting_WalkP2;
+    private readonly InputAction m_Fighting_SprintP1;
+    private readonly InputAction m_Fighting_SprintP2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Fighting".
     /// </summary>
@@ -601,6 +645,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @WalkP2 => m_Wrapper.m_Fighting_WalkP2;
         /// <summary>
+        /// Provides access to the underlying input action "Fighting/SprintP1".
+        /// </summary>
+        public InputAction @SprintP1 => m_Wrapper.m_Fighting_SprintP1;
+        /// <summary>
+        /// Provides access to the underlying input action "Fighting/SprintP2".
+        /// </summary>
+        public InputAction @SprintP2 => m_Wrapper.m_Fighting_SprintP2;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Fighting; }
@@ -668,6 +720,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @WalkP2.started += instance.OnWalkP2;
             @WalkP2.performed += instance.OnWalkP2;
             @WalkP2.canceled += instance.OnWalkP2;
+            @SprintP1.started += instance.OnSprintP1;
+            @SprintP1.performed += instance.OnSprintP1;
+            @SprintP1.canceled += instance.OnSprintP1;
+            @SprintP2.started += instance.OnSprintP2;
+            @SprintP2.performed += instance.OnSprintP2;
+            @SprintP2.canceled += instance.OnSprintP2;
         }
 
         /// <summary>
@@ -721,6 +779,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @WalkP2.started -= instance.OnWalkP2;
             @WalkP2.performed -= instance.OnWalkP2;
             @WalkP2.canceled -= instance.OnWalkP2;
+            @SprintP1.started -= instance.OnSprintP1;
+            @SprintP1.performed -= instance.OnSprintP1;
+            @SprintP1.canceled -= instance.OnSprintP1;
+            @SprintP2.started -= instance.OnSprintP2;
+            @SprintP2.performed -= instance.OnSprintP2;
+            @SprintP2.canceled -= instance.OnSprintP2;
         }
 
         /// <summary>
@@ -859,5 +923,19 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWalkP2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SprintP1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSprintP1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SprintP2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSprintP2(InputAction.CallbackContext context);
     }
 }

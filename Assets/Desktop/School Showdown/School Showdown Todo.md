@@ -82,7 +82,7 @@ P1 = John / Mo, P2 = Jack / Nick
 
 
 
-* Do animation for jumping
+* Do animation for jumping/movement ✅
 
 
 

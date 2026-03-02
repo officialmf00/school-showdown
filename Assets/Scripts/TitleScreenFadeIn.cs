@@ -13,7 +13,7 @@ public class TitleScreenFadeIn : MonoBehaviour
     [SerializeField] private AudioSource titleScreenAmbience;
     [SerializeField] private AudioSource menuMusic;
 
-    private bool menuMusicOverrideDisable = true; // only does anything if set to true, where it will fully disable music
+    private bool menuMusicOverrideDisable = false; // only does anything if set to true, where it will fully disable music
 
     private float fadeTime = 3;
 

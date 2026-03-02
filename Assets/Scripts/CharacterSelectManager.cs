@@ -1,16 +1,22 @@
+using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterSelectManager : MonoBehaviour
 {
-    private string player1CharacterName;
-    private string player2CharacterName;
+    [SerializeField] private string player1CharacterName;
+    [SerializeField] private string player2CharacterName;
 
     [SerializeField] private GameObject battleUI;
 
+    [SerializeField] private GameObject freeplayStartButton;
+
     [SerializeField] private TextMeshProUGUI player1NameText;
     [SerializeField] private TextMeshProUGUI player2NameText;
+
+    [SerializeField] private TextMeshProUGUI stageNameText;
+    [SerializeField] private TextMeshProUGUI trackNameText;
 
     [SerializeField] private int currentSelectingPlayer;
     [SerializeField] private string currentlySelectingStage;
@@ -24,14 +30,52 @@ public class CharacterSelectManager : MonoBehaviour
 
     [SerializeField] private GameObject battleMusicHolder;
 
+    [SerializeField] private FightMusicToggle battleMusicToggleButton;
+
     private Vector3 player1SpawnPos = new(0, 1, 1.22000003f);
     private Vector3 player2SpawnPos = new(0, 1, 6.81379747f);
 
     private Quaternion player1SpawnRotation = new(0, 0, 0, 1);
     private Quaternion player2SpawnRotation = new(0, 180.235321f, 0, 1);
 
+    [SerializeField] private string[] Player1Characters;
+    [SerializeField] private string[] Player2Characters;
+
+    private void Awake()
+    {
+        freeplayStartButton.SetActive(false);
+    }
+
     public void SelectCharacter(string characterName)
     {
+
+        int i = 0; // for what player is selected (1)
+
+        while (i < Player1Characters.Length)
+        {
+            if (Player1Characters[i] == characterName)
+            {
+                currentSelectingPlayer = 1;
+                break;
+            }
+
+            i++;
+        }
+
+        i = 0; // for what player is selected (2)
+
+        while (i < Player2Characters.Length)
+        {
+            if (Player2Characters[i] == characterName)
+            {
+                currentSelectingPlayer = 2;
+                break;
+            }
+
+            i++;
+        }
+
+        //print(currentSelectingPlayer);
 
         switch (currentSelectingPlayer)
         {
@@ -45,18 +89,44 @@ public class CharacterSelectManager : MonoBehaviour
                 break;
         }
 
+        // auto-set music
+
+        if (currentySelectingMusic == "None") // auto set music if no song was already chosen
+        {
+            switch (characterName)
+            {
+                case "Mo":
+                    currentySelectingMusic = "Storyteller";
+                    trackNameText.text = "Storyteller";
+                    break;
+            }
+        }
+
+        StartCheck();
+
     }
 
-    public void SwitchSelectingPlayer()
+    public void SelectStage(string stageName)
     {
-        if (currentSelectingPlayer == 1)
-        {
-            currentSelectingPlayer = 2;
+        currentlySelectingStage = stageName;
+        stageNameText.text = stageName;
 
-        }
-        else
+        StartCheck();
+    }
+
+    public void SelectMusic(string trackName)
+    {
+        currentySelectingMusic = trackName;
+        trackNameText.text = trackName;
+
+        StartCheck();
+    }
+
+    private void StartCheck()
+    {
+        if (player1CharacterName != "None" && player2CharacterName != "None" && currentySelectingMusic != "None" && currentlySelectingStage != "None")
         {
-            currentSelectingPlayer = 1;
+            freeplayStartButton.SetActive(true);
         }
     }
 
@@ -175,6 +245,9 @@ public class CharacterSelectManager : MonoBehaviour
 
         // Play battle track
 
-        fightSong.GetComponent<AudioSource>().Play();
+        if (battleMusicToggleButton.getMusicState())
+        {
+            fightSong.GetComponent<AudioSource>().Play();
+        }
     }
 }

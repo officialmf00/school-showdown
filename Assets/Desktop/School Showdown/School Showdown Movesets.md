@@ -42,7 +42,7 @@
 
 
 
-<b>Mo:</b>
+**Mo:**
 
 
 
@@ -74,9 +74,5 @@ S4/Diagonalite = If mid-air, Mo will shoot downwards in a right diagonal line, s
 
 
 
-ULT/Death From Above = Mo will launch forward in an attempt to grab his opponent. If he grabs them successfully, a cutscene will play where Mo grabs them by the face and slams them into the ground, dragging them across the floor. Once dragged enough distance, Mo will throw them into the air, proceeding to hit them with a barrage of lightning strikes. Afterwards, he will zoom behind them, and the cutscene will end with Mo sending out a substancial, seemingly gargantuan punch with a fade to white.
-
-
-
-
+ULT/Rain Of Terror = Mo will launch forward in an attempt to grab his opponent. If he grabs them successfully, a cutscene will play where Mo grabs them by the face and slams them into the ground, dragging them across the floor. Once dragged enough distance, Mo will throw them into the air, proceeding to hit them with a barrage of lightning strikes. Afterwards, he will zoom behind them, and the cutscene will end with Mo sending out a substancial, seemingly gargantuan punch with a fade to white.
 

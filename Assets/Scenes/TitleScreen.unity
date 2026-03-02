@@ -8821,6 +8821,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3472818245320204359, guid: 19357a9cb79c5ed459a6c19c79843fb4, type: 3}
+      propertyPath: uiClickSound
+      value: 
+      objectReference: {fileID: 865890460}
     - target: {fileID: 8820727739624371463, guid: 19357a9cb79c5ed459a6c19c79843fb4, type: 3}
       propertyPath: m_Name
       value: SceneLevelLoader
