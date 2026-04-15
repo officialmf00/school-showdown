@@ -74,7 +74,7 @@ P1 = John / Mo, P2 = Jack / Nick
 
 
 
-* Find \& import character model for Mo  ⭕
+* Find \& import character model for Mo ✅
 
 
 
